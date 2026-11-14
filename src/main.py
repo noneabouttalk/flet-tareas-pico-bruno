@@ -27,7 +27,7 @@ def main(page):                                     # Flet la llama al abrir y l
             casilla = fila.controls[0]              # [0] = el Checkbox
             if casilla.value == False:              # sin marcar = pendiente
                 pendientes = pendientes + 1
-        contador.value = f"Tareas pendientes: {pendientes}"
+        contador.value = f"Tareas: {len(tareas.controls)} * Tareas pendientes: {pendientes}"
 
         if len(tareas.controls) == 0: #Si NO hay ninguna tarea
             contador.color = ft.Colors.RED
