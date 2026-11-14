@@ -1,0 +1,17 @@
+[project]
+name = "flet-tareas"
+version = "1.0.0"
+description = "Lista de tareas hecha con Flet (práctica de 2.º ASIR)"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Bruno Picó" }]
+dependencies = ["flet==1.0.5"]
+
+[tool.flet]
+org = "com.brunopico"
+product = "Mis tareas"
+company = "Bruno Picó"
+copyright = "Copyright (C) 2026 Bruno Picó"
+
+[tool.flet.app]
+path = "src"

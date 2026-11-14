@@ -1,0 +1,54 @@
+name: Compilar app (apk, Linux y Windows)
+
+on:
+  push:                     # cada vez que hago push
+  workflow_dispatch:        # o a mano desde la pestaña Actions
+
+env:
+  UV_PYTHON: "3.12"
+  FLET_CLI_NO_RICH_OUTPUT: 1
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest  # servidor Linux x86_64 (sí hay Android SDK)
+    steps:
+      - uses: actions/checkout@v4             # descarga mi código
+      - uses: astral-sh/setup-uv@v6           # instala uv (Python + dependencias)
+      - uses: actions/setup-java@v4           # JDK 17 para Android
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: Compilar apk
+        run: uv run flet build apk --yes --verbose
+      - uses: actions/upload-artifact@v4      # guarda el resultado para descargarlo
+        with:
+          name: mis-tareas-apk
+          path: build/apk
+
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - name: Librerías de sistema para Linux
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y $(uv run flet --version --json | jq -r '.linux_dependencies | join(" ")')
+      - name: Compilar Linux
+        run: uv run flet build linux --yes --verbose
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mis-tareas-linux
+          path: build/linux
+
+  windows:
+    runs-on: windows-latest  # servidor Windows
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - name: Compilar Windows
+        run: uv run flet build windows --yes --verbose
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mis-tareas-windows
+          path: build/windows
