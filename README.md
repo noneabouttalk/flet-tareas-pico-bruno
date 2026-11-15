@@ -25,3 +25,8 @@ flet build apk                    # Android (build/apk)
 flet build linux                  # desde Linux
 flet build windows                # desde Windows
 ```
+
+## Extra
+En `extra/main_estudio.py` hay una versión ampliada con mejoras adicionales que he practicado
+(ordenar A-Z/Z-A, pendientes primero, subir tareas, marcar todas, confirmaciones...).
+La versión entregada es `src/main.py`.
