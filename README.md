@@ -14,7 +14,7 @@ Autor: Bruno Picó.
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-pip install flet
+pip install flet==1.0.5
 flet run src/main.py
 ```
 
